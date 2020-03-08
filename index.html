@@ -1,0 +1,185 @@
+<html>
+<head>
+<script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js?hcode=c11e6e3cfefb406e8ce8d99fa8368d33"></script>
+<script src="https://cdn.anychart.com/releases/v8/js/anychart-ui.min.js?hcode=c11e6e3cfefb406e8ce8d99fa8368d33"></script>
+<script src="https://cdn.anychart.com/releases/v8/js/anychart-exports.min.js?hcode=c11e6e3cfefb406e8ce8d99fa8368d33"></script>
+<link href="https://cdn.anychart.com/releases/v8/css/anychart-ui.min.css?hcode=c11e6e3cfefb406e8ce8d99fa8368d33" type="text/css" rel="stylesheet">
+<link href="https://cdn.anychart.com/releases/v8/fonts/css/anychart-font.min.css?hcode=c11e6e3cfefb406e8ce8d99fa8368d33" type="text/css" rel="stylesheet">
+<style type="text/css">
+html, body, #container {
+width: 100%;
+height: 100%;
+margin: 0;
+padding: 0;
+}
+</style>
+</head>
+<body>
+<div id="container"></div>
+<script>
+anychart.onDocumentReady(function () {
+// create data set on our data
+var dataSet = anychart.data.set(getData());
+
+// map data for the first series, take x from the zero column and value from the first column of data set
+var seriesData_1 = dataSet.mapAs({'x': 0, 'value': 1});
+
+
+// create line chart
+var chart = anychart.line();
+
+// adding dollar symbols to yAxis labels
+chart.yAxis().labels().format('${%Value}');
+
+// turn on chart animation
+chart.animation(true);
+
+// turn on the crosshair
+chart.crosshair()
+.enabled(true)
+.yLabel({enabled: false})
+.yStroke(null)
+.xStroke('#cecece')
+.zIndex(99);
+
+chart.yAxis()
+.title('Number of strands')
+.labels({'padding': [5, 5, 0, 5]});
+chart.xAxis().title('Number of cycles');
+
+// set chart title text settings
+chart.title('The chart for qpcr machine');
+
+// create first series with mapped data
+var series_1 = chart.spline(seriesData_1);
+series_1.name('Number of strands over linear number of cycles');
+series_1.markers().zIndex(100);
+series_1.hovered().markers()
+.enabled(true)
+.type('circle')
+.size(4);
+
+
+
+// turn the legend on
+chart.legend()
+.enabled(true)
+.fontSize(13)
+.padding([0, 0, 20, 0]);
+
+// set container id for the chart
+chart.container('container');
+
+// initiate chart drawing
+chart.draw();
+});
+
+function getData() {
+return [
+  [0 , 1],
+  [1	, 2],
+  [2	, 4],
+  [3	, 8],
+  [4	, 16],
+  [5	, 32],
+  [6	, 64],
+  [7	, 128],
+  [8	, 256],
+  [9	, 512],
+  [10	, 1024],
+  [11	, 2048],
+  [12	, 4096],
+  [13	, 8192],
+  [14	, 16384],
+  [15	, 32768],
+  [16	, 65536],
+  [17	, 131072],
+  [18	, 262144],
+  [19	, 524288],
+  [20	, 1048576],
+  [21	, 2097152],
+  [22	, 4194304],
+  [23	, 8388608],
+  [24	, 16777216],
+  [25	, 33554432],
+  [26	, 67108864],
+  [27	, 134217728],
+  [28	, 268435456],
+  [29	, 536870912],
+  [30	, 1073741824],
+  [31	, 2147483648],
+  [32	, 4294967296],
+  [33	, 8589934592],
+  [34	, 17179869184],
+  [35	, 34359738368],
+  [36	, 68719476736],
+  [37	, 137438953472],
+  [38	, 274877906944],
+  [39	, 549755813888],
+  [40	, 1099511627776],
+  [41	, 2199023255552],
+  [42	, 4398046511104],
+  [43	, 8796093022208],
+  [44	, 17592186044416],
+  [45	, 35184372088832],
+  [46	, 70368744177664],
+  [47	, 140737488355328],
+  [48	, 281474976710656],
+  [49	, 562949953421312],
+  [50	, 1125899906842624],
+  [51	, 2251799813685248],
+  [52	, 4503599627370496],
+  [53	, 9007199254740992],
+  [54	, 18014398509481984],
+  [55	, 36028797018963968],
+  [56	, 72057594037927936],
+  [57	, 144115188075855872],
+  [58	, 288230376151711744],
+  [59	, 576460752303423488],
+  [60	, 1152921504606846976],
+  [61	, 2305843009213693952],
+  [62	, 4611686018427387904],
+  [63	, 9223372036854775808],
+  [64	, 18446744073709551616],
+  [65	, 36893488147419103232],
+  [66	, 73786976294838206464],
+  [67	, 147573952589676412928],
+  [68	, 295147905179352825856],
+  [69	, 590295810358705651712],
+  [70	, 1180591620717411303424],
+  [71	, 2361183241434822606848],
+  [72	, 4722366482869645213696],
+  [73	, 9444732965739290427392],
+  [74	, 18889465931478580854784],
+  [75	, 37778931862957161709568],
+  [76	, 75557863725914323419136],
+  [77	, 151115727451828646838272],
+  [78	, 302231454903657293676544],
+  [79	, 604462909807314587353088],
+  [80	, 1208925819614629174706176],
+  [81	, 2417851639229258349412352],
+  [82	, 4835703278458516698824704],
+  [83	, 9671406556917033397649408],
+  [84	, 19342813113834066795298816],
+  [85	, 38685626227668133590597632],
+  [86	, 77371252455336267181195264],
+  [87	, 154742504910672534362390528],
+  [88	, 309485009821345068724781056],
+  [89	, 618970019642690137449562112],
+  [90	, 1237940039285380274899124224],
+  [91	, 2475880078570760549798248448],
+  [92	, 4951760157141521099596496896],
+  [93	, 9903520314283042199192993792],
+  [94	, 19807040628566084398385987584],
+  [95	, 39614081257132168796771975168],
+  [96	, 79228162514264337593543950336],
+  [97	, 158456325028528675187087900672],
+  [98	, 316912650057057350374175801344],
+  [99	, 633825300114114700748351602688],
+  [100 ,	1267650600228229401496703205376]
+
+]
+}
+</script>
+</body>
+</html>
