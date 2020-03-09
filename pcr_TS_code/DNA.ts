@@ -6,7 +6,7 @@ export class DNA {
   *This function return matching neucleotide
   *return type String
   **/
-  private matchNeucleotides(letter:string):string{
+  public matchNeucleotides(letter:string):string{
     if(letter == "A")
       return "T";
     else if(letter == "T")
@@ -16,17 +16,29 @@ export class DNA {
     else if(letter == "G")
       return "C"
     else{
+      console.log("letter is " + letter);
+
       return "Error!!"
     }
   }
-  private generateDNA(dnasize:number){
+  public generateDNA(dnasize:number){
+    let bases = new Base([""])
     for (let index = 0; index < dnasize; index++) {
-      let initial = this.bases.getRandomNeucleotide();
+      let initial = bases.getRandomNeucleotide();
       this.strands.push([initial,this.matchNeucleotides(initial)]);
 
     }
   }
-  constructor(public size:number, public strands:string[][], public bases: Base) {
+  public size : number;
+  public getSize(){
+    let num : number = 0;
+    this.strands.forEach(element => {
+      num++;
+    });
+    this.size = num;
+    return this.size;
+  }
+  constructor( public strands:string[][]) {
 
   }
 }

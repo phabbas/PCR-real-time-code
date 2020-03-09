@@ -29,7 +29,7 @@ var seriesData_1 = dataSet.mapAs({'x': 0, 'value': 1});
 var chart = anychart.line();
 
 // adding dollar symbols to yAxis labels
-chart.yAxis().labels().format('${%Value}');
+chart.yAxis().labels().format('{%Value}');
 
 // turn on chart animation
 chart.animation(true);
