@@ -1,5 +1,5 @@
 export class Base {
-  constructor(private bases:string[]) {
+  constructor(public bases:string[]) {
     this.bases=["A","G","T","C"];
   }
   /**

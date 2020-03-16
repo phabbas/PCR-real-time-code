@@ -1,22 +1,34 @@
 import { DNA } from "./DNA";
 import { Base } from "./Base";
 import { Temperature } from "./Temperature";
+
+
+
+
 export class Pcr{
+
   public Dna_list : DNA[] = [new DNA([["A","T"],["C","G"],["G","C"],["T","A"]])];
-  public B : Base;
-  public temp_control : Temperature;
+  public B : Base = new Base([""]);
+  public temp_control : Temperature = new Temperature(0,0,0);
+
+
+
+
   /**
    * Denature_DNA
    */
   public Denature_DNA(test_Dna : DNA ) {
-    let singleton1 : DNA = test_Dna;
+
     let singleton2 : DNA = new DNA([]);
-    singleton1.strands.forEach(element => {
+    test_Dna.strands.forEach(element => {
       singleton2.strands.push(this.Reverse_N(element))
     });
     this.Dna_list.push(singleton2);
 
   }
+
+
+
   /**
    * Reverse_N
    */
@@ -27,6 +39,16 @@ export class Pcr{
     }
     return reversed;
   }
+
+
+
+
+
+
+
+
+
+
   constructor(){
 
 
@@ -39,9 +61,27 @@ export class Pcr{
     return num;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /**
 main app
 **/
+const num_cycles = 5;
 
 let qpcr = new Pcr();
 qpcr.temp_control = new Temperature(35,45,95);
@@ -51,11 +91,22 @@ if (qpcr.temp_control.getcurrenttemp() < 45 ) {
   console.log("denature_temperature :: " + qpcr.temp_control.getcurrenttemp());
 
 }
+console.log(qpcr.Dna_list[0]);
 
 qpcr.Denature_DNA(qpcr.Dna_list[0]);
+console.log("=======after======== denature")
 qpcr.Dna_list.forEach(element => {
   console.log(element);
 
 });
 
-console.log(qpcr.getNumberofDNA());
+console.log("Number of DNA after Denature :: " + qpcr.getNumberofDNA());
+for (let i = 0; i < num_cycles; i++) {
+  qpcr.Dna_list.forEach(dna => {
+    qpcr.Denature_DNA(dna);
+  });
+
+  console.log("Number of DNA strands after cycle_complete :: " + qpcr.getNumberofDNA());
+
+
+}

@@ -29,7 +29,7 @@ export class DNA {
 
     }
   }
-  public size : number;
+  public size : number = 0;
   public getSize(){
     let num : number = 0;
     this.strands.forEach(element => {
